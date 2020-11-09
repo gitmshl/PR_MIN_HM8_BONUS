@@ -1,0 +1,28 @@
+version: "3"
+services:
+  balancer:
+    build:
+      context: ./balancer
+      dockerfile: dockerfile
+    depends_on:
+      - server1
+      - server2
+    image: dockermshl/docker_test:balancer
+    ports:
+    - "8082:8082"
+
+  server1:
+    build:
+      context: ./server1
+      dockerfile: dockerfile
+    image: dockermshl/docker_test:server1
+    ports:
+    - "8080:8080"
+
+  server2:
+    build:
+      context: ./server2
+      dockerfile: dockerfile
+    image: dockermshl/docker_test:server2 
+    ports:
+    - "8081:8081"
